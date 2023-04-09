@@ -6,6 +6,7 @@ import Nav from "./components/Nav";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import CreatePost from "./components/CreatePost";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/createpost" element={<CreatePost />} />
       </Routes>
     </div>
   );

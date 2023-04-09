@@ -11,3 +11,8 @@
   font-size: 32px;
   font-weight: 700;
 }
+
+.error_message {
+  font-size: 13px;
+  color: orangered;
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "./index.module.css";
 import { Link } from "react-router-dom";
 
@@ -25,8 +25,23 @@ function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    setIsLoggedIn(!!userId);
+  }, []);
+
   return (
     <div className={style.container}>
+      <div>
+        {isLoggedIn ? (
+          <div className="green-card">Logged in</div>
+        ) : (
+          <div className="red-card">Not logged in</div>
+        )}
+      </div>
+
       <div>
         <Card align="center">
           <CardHeader>
@@ -40,9 +55,12 @@ function Home() {
           </CardBody>
           <CardFooter>
             <>
-              <Button onClick={onOpen} colorScheme="blue" variant="outline">
-                {<BiPlus />} Create New Post
-              </Button>
+              <Link to={isLoggedIn ? "/createpost" : "/"}>
+                <Button onClick={onOpen} colorScheme="blue" variant="outline">
+                  {<BiPlus />} Create New Post
+                </Button>
+              </Link>
+
               <AlertDialog
                 motionPreset="slideInBottom"
                 leastDestructiveRef={cancelRef}

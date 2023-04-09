@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import style from "./login.module.css";
 
 import "antd/dist/reset.css";
@@ -10,8 +10,9 @@ import "firebase/compat/auth";
 import "firebase/compat/database";
 
 function Login() {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const errorMessageElement = document.getElementById("error-message");
 
   const onLoginFinish = async (values: any) => {
     setLoading(true);
@@ -32,13 +33,23 @@ function Login() {
           // Check if the password matches
           if (user.password === values.password) {
             console.log("User authenticated");
-            history.push("/");
+            localStorage.setItem("userId", user.userId);
+            navigate("/");
+            window.location.reload();
+
             // TODO: Redirect user to authorized resources
           } else {
+            document.addEventListener("DOMContentLoaded", function () {
+              errorMessageElement.textContent = "Incorrect password";
+            });
+
             console.log("Incorrect password");
             // TODO: Show error message
           }
         } else {
+          document.addEventListener("DOMContentLoaded", function () {
+            errorMessageElement.textContent = "User does not exist";
+          });
           console.log("User does not exist");
           // TODO: Show error message or redirect user to registration page
         }
@@ -100,6 +111,7 @@ function Login() {
           </Button>
         </Form.Item>
       </Form>
+      <p className={style.error_message} id="error-message"></p>
     </div>
   );
 }
