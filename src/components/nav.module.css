@@ -1,0 +1,17 @@
+.container {
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+  height: 5rem;
+  border-bottom: 1px solid lightgray;
+}
+
+.logo {
+  width: 30%;
+}
