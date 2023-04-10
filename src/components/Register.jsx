@@ -2,7 +2,7 @@ import React from "react";
 import style from "./login.module.css";
 
 import "antd/dist/reset.css";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Form, Input } from "antd";
 
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";

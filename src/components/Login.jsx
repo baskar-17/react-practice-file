@@ -3,16 +3,7 @@ import { useNavigate } from "react-router-dom";
 import style from "./login.module.css";
 
 import "antd/dist/reset.css";
-import {
-  Button,
-  Checkbox,
-  Form,
-  Input,
-  Divider,
-  notification,
-  message,
-  Space,
-} from "antd";
+import { Button, Form, Input, message } from "antd";
 
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
