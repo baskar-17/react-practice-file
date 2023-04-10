@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ButtonGroup, Button } from "@chakra-ui/react";
+import { ButtonGroup, Button, IconButton } from "@chakra-ui/react";
 import logo from "../assets/devlab_svg.svg";
 import style from "./nav.module.css";
+import { FiLogOut } from "react-icons/fi";
 
 function Nav() {
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
@@ -24,21 +25,14 @@ function Nav() {
         </Link>
       </div>
       {userId ? (
-        <ButtonGroup gap={4}>
-          <Link to={"/dashboard"}>
-            <Button spinnerPlacement="start" colorScheme="blue" variant="solid">
-              Dashboard
-            </Button>
-          </Link>
-          <Button
-            spinnerPlacement="start"
-            colorScheme="blue"
-            variant="outline"
-            onClick={handleLogout}
-          >
-            Log out
-          </Button>
-        </ButtonGroup>
+        <IconButton
+          variant="outline"
+          colorScheme="blue"
+          aria-label="Call Sage"
+          fontSize="20px"
+          onClick={handleLogout}
+          icon={<FiLogOut />}
+        />
       ) : (
         <ButtonGroup gap={4}>
           <Link to={"/login"}>

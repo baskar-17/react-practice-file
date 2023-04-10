@@ -3,7 +3,16 @@ import { useNavigate } from "react-router-dom";
 import style from "./login.module.css";
 
 import "antd/dist/reset.css";
-import { Button, Checkbox, Form, Input } from "antd";
+import {
+  Button,
+  Checkbox,
+  Form,
+  Input,
+  Divider,
+  notification,
+  message,
+  Space,
+} from "antd";
 
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
@@ -11,8 +20,30 @@ import "firebase/compat/database";
 
 function Login() {
   const navigate = useNavigate();
+
   const [loading, setLoading] = useState(false);
-  const errorMessageElement = document.getElementById("error-message");
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const success = () => {
+    messageApi.open({
+      type: "success",
+      content: "Loggedin Successfully",
+    });
+  };
+
+  const error = () => {
+    messageApi.open({
+      type: "error",
+      content: "Incorrect Password",
+    });
+  };
+
+  const warning = () => {
+    messageApi.open({
+      type: "warning",
+      content: "User does not exist",
+    });
+  };
 
   const onLoginFinish = async (values: any) => {
     setLoading(true);
@@ -32,6 +63,7 @@ function Login() {
           const user = Object.values(users)[0];
           // Check if the password matches
           if (user.password === values.password) {
+            success();
             console.log("User authenticated");
             localStorage.setItem("userId", user.userId);
             navigate("/");
@@ -39,17 +71,12 @@ function Login() {
 
             // TODO: Redirect user to authorized resources
           } else {
-            document.addEventListener("DOMContentLoaded", function () {
-              errorMessageElement.textContent = "Incorrect password";
-            });
-
+            error();
             console.log("Incorrect password");
             // TODO: Show error message
           }
         } else {
-          document.addEventListener("DOMContentLoaded", function () {
-            errorMessageElement.textContent = "User does not exist";
-          });
+          warning();
           console.log("User does not exist");
           // TODO: Show error message or redirect user to registration page
         }
@@ -69,6 +96,7 @@ function Login() {
 
   return (
     <div className={style.container}>
+      {contextHolder}
       <h1 className={style.heading}>Login</h1>
 
       <Form
@@ -97,21 +125,12 @@ function Login() {
           <Input.Password />
         </Form.Item>
 
-        <Form.Item
-          name="remember"
-          valuePropName="checked"
-          wrapperCol={{ offset: 8, span: 16 }}
-        >
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit" loading={loading}>
             Submit
           </Button>
         </Form.Item>
       </Form>
-      <p className={style.error_message} id="error-message"></p>
     </div>
   );
 }
