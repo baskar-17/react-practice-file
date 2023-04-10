@@ -36,7 +36,7 @@ function Login() {
     });
   };
 
-  const onLoginFinish = async (values: any) => {
+  const onLoginFinish = async (values) => {
     setLoading(true);
 
     try {
@@ -81,7 +81,7 @@ function Login() {
     setLoading(false);
   };
 
-  const onFinishFailed = (errorInfo: any) => {
+  const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
 
