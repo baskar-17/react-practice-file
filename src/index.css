@@ -1,51 +1,28 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
 
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-row {
-  display: flex;
-  flex-direction: column !important;
-  width: 100% !important;
-}
+:root {
+  /* Colors */
+  --primary: #357ded;
+  --secondary: #f46036;
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-form-item
-  .ant-form-item-label {
-  text-align: start;
-}
+  --primary-h: #235ab2;
+  --secondary-h: #b74626;
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-form-horizontal
-  .ant-form-item-control {
-  flex: 1;
-  width: 100% !important;
-}
+  --line: #f0f0f0;
+  --stroke: #dbdcde;
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-input,
-:where(.css-dev-only-do-not-override-1vtf12y).ant-input-affix-wrapper {
-  padding: 8px 16px;
-  width: 400px;
-}
+  --positive: #1b998b;
+  --negative: #e71d36;
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-col-offset-8 {
-  margin-inline-start: 0;
-  width: 100% !important;
-}
-
-:where(.css-dev-only-do-not-override-1vtf12y).ant-btn {
-  height: fit-content;
-  padding: 8px 16px;
-  width: 100% !important;
-}
-
-:where(.css-dev-only-do-not-override-1vtf12y).ant-btn-primary {
-  width: 100% !important;
-}
-
-:where(.css-dev-only-do-not-override-1vtf12y).ant-col-16 {
-  max-width: 100% !important;
+  --black: #1e1e24;
+  --gray1: #929396;
+  --gray2: #c8c8c8;
 }

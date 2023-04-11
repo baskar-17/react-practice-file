@@ -1,101 +1,96 @@
-import React, { useEffect, useState } from "react";
-import style from "./index.module.css";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./home.module.css";
+import InProgress from "./InProgress";
+import Completed from "./Completed";
 
-import { useDisclosure } from "@chakra-ui/react";
 import { BiPlus } from "react-icons/bi";
-import {
-  Card,
-  Button,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Heading,
-  Text,
-  AlertDialog,
-  AlertDialogOverlay,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogCloseButton,
-  AlertDialogBody,
-  AlertDialogFooter,
-} from "@chakra-ui/react";
+import { Modal } from "antd";
 
 function Home() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const cancelRef = React.useRef();
+  const navigate = useNavigate();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    setIsLoggedIn(!!userId);
+    const storedValue = localStorage.getItem("inputValue");
+    if (storedValue) {
+      setUserName(storedValue);
+      setIsModalOpen(false);
+    }
   }, []);
 
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleCancel = () => {
+    setInputValue("");
+    setIsModalOpen(false);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    localStorage.setItem("inputValue", inputValue);
+    console.log("inputValue:", inputValue);
+    setInputValue("");
+    setIsModalOpen(false);
+    window.location.reload();
+  };
+
   return (
-    <div className={style.container}>
-      <div>
-        {isLoggedIn ? (
-          <div className="green-card">Logged in</div>
-        ) : (
-          <div className="red-card">Not logged in</div>
-        )}
+    <div>
+      <div className={styles["dailydo-container"]}>
+        <div className={styles["dailydo-head-container"]}>
+          <div className={styles["dailydo-image-container"]}>
+            <img
+              src="https://source.unsplash.com/random/600x600/?nature"
+              alt="DailyDo user profile"
+            />
+          </div>
+          <div className={styles["dailydo-heading-container"]}>
+            <p className={styles["dailydo-description"]}>Hello,</p>
+            <p className={styles["dailydo-user-name"]}>
+              {userName ? `${userName}` : "Aline"}
+            </p>
+          </div>
+        </div>
+        <button
+          className={styles["dailydo-primary-btn"]}
+          onClick={() => {
+            if (localStorage.getItem("inputValue")) {
+              navigate("/create-todo");
+            } else {
+              setIsModalOpen(true);
+            }
+          }}
+        >
+          <BiPlus fontSize={20} />
+          Add Todo
+        </button>
+        <Modal
+          title="Let us know who is using 🤔"
+          open={isModalOpen}
+          onOk={handleSubmit}
+          onCancel={handleCancel}
+        >
+          <form>
+            <input
+              type="text"
+              className={styles["dailydo-username-prompt"]}
+              placeholder="Enter your name"
+              value={inputValue}
+              onChange={handleInputChange}
+            />
+          </form>
+        </Modal>
       </div>
 
-      <div>
-        <Card align="center">
-          <CardHeader>
-            <Heading size="md"> You haven't created any post</Heading>
-          </CardHeader>
-          <CardBody>
-            <Text>
-              Start create a post to interact with multiple peoples and get
-              notices in the community.
-            </Text>
-          </CardBody>
-          <CardFooter>
-            <>
-              <Link to={isLoggedIn ? "/createpost" : "/"}>
-                <Button onClick={onOpen} colorScheme="blue" variant="outline">
-                  {<BiPlus />} Create New Post
-                </Button>
-              </Link>
-
-              <AlertDialog
-                motionPreset="slideInBottom"
-                leastDestructiveRef={cancelRef}
-                onClose={onClose}
-                isOpen={isOpen}
-                isCentered
-              >
-                <AlertDialogOverlay />
-
-                <AlertDialogContent>
-                  <AlertDialogHeader>
-                    You are not Logged in yet
-                  </AlertDialogHeader>
-                  <AlertDialogCloseButton />
-                  <AlertDialogBody>
-                    Please create an account first before creating post.
-                  </AlertDialogBody>
-                  <AlertDialogFooter>
-                    <Link to={"/login"}>
-                      <Button
-                        colorScheme="blue"
-                        variant="outline"
-                        ref={cancelRef}
-                        onClick={onClose}
-                      >
-                        Login
-                      </Button>
-                    </Link>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
-            </>
-          </CardFooter>
-        </Card>
-      </div>
+      <InProgress />
+      <Completed />
     </div>
   );
 }
