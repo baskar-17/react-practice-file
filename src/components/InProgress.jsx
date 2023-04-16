@@ -34,8 +34,6 @@ function InProgress() {
           </p>
           <button className={styles["dailydo-card-btn"]}>Mark as Done</button>
         </div>
-
-        {/* <div className={styles["dailydo-card-color-status"]}></div> */}
       </div>
     </div>
   );

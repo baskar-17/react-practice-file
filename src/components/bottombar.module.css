@@ -4,35 +4,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-
-  .dailydo-head-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .dailydo-image-container {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    overflow: hidden;
-  }
-
-  .dailydo-image-container img {
+    position: fixed;
+    bottom: 0;
     width: 100%;
-    object-fit: cover;
-  }
-
-  .dailydo-description {
-    font-size: 13px;
-    color: var(--gray2);
-  }
-
-  .dailydo-user-name {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--black);
   }
 
   .dailydo-primary-btn {
@@ -46,7 +20,8 @@
     justify-content: center;
     align-items: center;
     gap: 4px;
-    height: fit-content;
+    height: 46px;
+    width: 100%;
   }
 
   .dailydo-primary-btn:hover {
@@ -60,5 +35,9 @@
     border-radius: 6px;
     width: 100%;
     margin: 8px 0;
+  }
+
+  .dailydo-username-prompt:focus {
+    outline: 1px solid var(--primary);
   }
 }

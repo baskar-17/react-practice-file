@@ -1,0 +1,44 @@
+@media (max-width: 576px) {
+  .dailydo-top-nav-container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    height: 56px;
+    padding: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .dailydo-form-container {
+    margin-top: 16px;
+    padding: 16px;
+  }
+
+  .dailydo-form-container h3 {
+    font-size: 18px;
+    font-weight: 600;
+    padding-bottom: 16px;
+  }
+
+  .dailydo-username-prompt {
+    border: 1px solid var(--stroke);
+    padding: 10px 10px;
+    border-radius: 6px;
+    width: 100%;
+    margin: 8px 0 24px 0;
+  }
+
+  .dailydo-primary-btn {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background-color: var(--primary);
+    padding: 8px 16px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    height: 46px;
+    width: 100%;
+  }
+}
